@@ -1,3 +1,5 @@
+ARG OTELCOL_BINARY=
+
 FROM alpine:latest AS prep
 RUN apk --update add ca-certificates
 
