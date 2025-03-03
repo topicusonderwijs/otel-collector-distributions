@@ -1,9 +1,9 @@
-ARG OTELCOL_BINARY=
-
 FROM alpine:latest AS prep
 RUN apk --update add ca-certificates
 
 FROM scratch
+
+ARG OTELCOL_BINARY
 
 ARG USER_UID=10001
 ARG USER_GID=10001
