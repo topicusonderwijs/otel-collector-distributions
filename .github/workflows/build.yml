@@ -37,6 +37,6 @@ jobs:
         with:
           context: .
           build-args: |
-            OTELCOL_BINARY=./dist/otelcol-cloudflare-logs
+            OTELCOL_BINARY=otelcol-cloudflare-logs
           push: false
           tags: ${{ github.actor }}/opentelemetry-collector-cloudflare:latest
