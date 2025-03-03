@@ -1,7 +1,7 @@
 dist:
   name: otelcol-cloudflare-logs
-  description: Basic OTel Collector distribution for Cloudflare Logs
-  output_path: ./otelcol-cloudflare
+  description: OTel Collector distribution for Cloudflare Logs
+  output_path: ./dist
 
 exporters:
   - gomod:
