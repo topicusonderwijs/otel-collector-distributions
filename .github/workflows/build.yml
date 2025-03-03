@@ -17,4 +17,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install OpenTelemetry Collector Builder
-        run: curl --proto '=https' --tlsv1.2 -fL -o /usr/local/bin/ocb https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv$OCB_VERSION/ocb_$OCB_VERSION_linux_amd64 && chmod +x /usr/local/bin/ocb          
+        run: curl --proto '=https' --tlsv1.2 -fL -o /usr/local/bin/ocb https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv${OCB_VERSION}/ocb_${OCB_VERSION}_linux_amd64 && chmod +x /usr/local/bin/ocb          
