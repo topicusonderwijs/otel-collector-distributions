@@ -1,5 +1,5 @@
 dist:
-  name: otelcol-cloudflare-logs
+  name: otelcol
   description: OTel Collector distribution for Cloudflare Logs
   output_path: ./dist
 
