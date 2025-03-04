@@ -4,7 +4,7 @@ ARG OTEL_VERSION
 WORKDIR /app
 COPY . .
 RUN go install go.opentelemetry.io/collector/cmd/builder@v${OTEL_VERSION}
-RUN CGO_ENABLED=0 builder --config=builder-config.yaml
+RUN CGO_ENABLED=0 builder --config=distributions/cloudflare-receiver/builder-config.yaml
 
 FROM alpine:latest AS prep
 RUN apk --update add ca-certificates
