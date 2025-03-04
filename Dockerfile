@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:1.21 AS build
+FROM --platform=$BUILDPLATFORM golang:1.23 AS build
 ARG TARGETPLATFORM
 ARG OTEL_VERSION
 WORKDIR /app
