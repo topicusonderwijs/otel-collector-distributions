@@ -14,17 +14,20 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      OCB_VERSION: '0.120.0'
+      OTEL_VERSION: '0.120.0'
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install OTel Collector Builder
-        run: curl --proto '=https' --tlsv1.2 -fL -o /usr/local/bin/ocb https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv${OCB_VERSION}/ocb_${OCB_VERSION}_linux_amd64 && chmod +x /usr/local/bin/ocb          
+      # - name: Install OTel Collector Builder
+      #   run: curl --proto '=https' --tlsv1.2 -fL -o /usr/local/bin/ocb https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv${OCB_VERSION}/ocb_${OCB_VERSION}_linux_amd64 && chmod +x /usr/local/bin/ocb          
 
-      - name: Build OTel Collector
-        run: ocb --config src/cloudflare-receiver/builder-config.yaml
+      # - name: Build OTel Collector
+      #   run: ocb --config src/cloudflare-receiver/builder-config.yaml
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -40,11 +43,12 @@ jobs:
         with:
           context: .
           build-args: |
-            OTELCOL_BINARY=otelcol-cloudflare-logs
+            OTEL_VERSION=$OTEL_VERSION
+          platforms: "linux/arm64,linux/amd64"
           labels: |
             org.opencontainers.image.created={{.Date}}
             org.opencontainers.image.title={{.ProjectName}}
             org.opencontainers.image.revision={{.FullCommit}}
             org.opencontainers.image.version={{.Version}}
-          push: true
+          push: false
           tags: ghcr.io/${{ github.actor }}/opentelemetry-collector-cloudflare:latest
