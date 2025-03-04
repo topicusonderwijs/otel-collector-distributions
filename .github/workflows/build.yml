@@ -42,6 +42,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./distributions/cloudflare-receiver
+          file: ./Dockerfile
           build-args: |
             OTEL_VERSION=${{env.OTEL_VERSION}}
           platforms: "linux/arm64,linux/amd64"
