@@ -51,6 +51,7 @@ jobs:
             org.opencontainers.image.title={{.ProjectName}}
             org.opencontainers.image.revision={{.FullCommit}}
             org.opencontainers.image.version={{.Version}}
+            org.opencontainers.image.description=OTel Collector - Cloudflare Logs
           push: true
           outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=OTel Collector - Cloudflare Logs
           tags: ghcr.io/${{ github.actor }}/opentelemetry-collector-cloudflare:latest
