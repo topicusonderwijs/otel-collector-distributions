@@ -2,9 +2,9 @@ FROM --platform=$BUILDPLATFORM golang:1.23 AS build
 ARG TARGETPLATFORM
 ARG OTEL_VERSION
 WORKDIR /app
-COPY . .
+COPY manifest.yaml .
 RUN go install go.opentelemetry.io/collector/cmd/builder@v${OTEL_VERSION}
-RUN CGO_ENABLED=0 builder --config=distributions/cloudflare-receiver/manifest.yaml
+RUN CGO_ENABLED=0 builder --config=manifest.yaml
 
 FROM alpine:latest AS prep
 RUN apk --update add ca-certificates
