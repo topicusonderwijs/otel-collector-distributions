@@ -40,7 +40,7 @@ jobs:
             ocb=.
           file: ./Dockerfile
           build-args: |
-            GO_VERSION= ${{ env.GO_VERSION }}
+            GO_VERSION=${{ env.GO_VERSION }}
           platforms: "linux/arm64,linux/amd64"
           labels: |
             org.opencontainers.image.source=https://github.com/{{ github.repository }}
