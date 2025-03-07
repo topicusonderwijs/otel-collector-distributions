@@ -13,17 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      OTEL_VERSION: '0.120.0'
-
     steps:
       - uses: actions/checkout@v4
-
-      # - name: Install OTel Collector Builder
-      #   run: curl --proto '=https' --tlsv1.2 -fL -o /usr/local/bin/ocb https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/cmd%2Fbuilder%2Fv${OCB_VERSION}/ocb_${OCB_VERSION}_linux_amd64 && chmod +x /usr/local/bin/ocb          
-
-      # - name: Build OTel Collector
-      #   run: ocb --config src/cloudflare-receiver/builder-config.yaml
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -38,13 +29,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get Go version
+        run: echo "GO_VERSION=$(go mod edit -json | jq -r .Go)" >> $GITHUB_ENV
+
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: ./distributions/cloudflare-receiver
+          build-contexts: |
+            ocb=.
           file: ./Dockerfile
           build-args: |
-            OTEL_VERSION=${{env.OTEL_VERSION}}
+            GO_VERSION= ${{ env.GO_VERSION }}
           platforms: "linux/arm64,linux/amd64"
           labels: |
             org.opencontainers.image.source=https://github.com/{{ github.repository }}

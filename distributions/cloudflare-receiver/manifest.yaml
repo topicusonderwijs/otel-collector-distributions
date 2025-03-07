@@ -1,7 +1,8 @@
 dist:
   name: otelcol
-  description: OTel Collector distribution for Cloudflare Logs
+  description: OTel Collector Cloudflare Logs
   output_path: ./dist
+  version: dev
 
 extensions:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.120.1
@@ -11,14 +12,14 @@ exporters:
 
 processors:
   - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.120.0
-  - gomod: go.opentelemetry.io/collector/processor/memorylimiterprocessor v0.121.0
+  - gomod: go.opentelemetry.io/collector/processor/memorylimiterprocessor v0.120.0
 
 receivers:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/cloudflarereceiver v0.120.1
 
 providers:
-  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.18.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.18.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.18.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.18.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.18.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.27.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.27.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.27.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.27.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.27.0

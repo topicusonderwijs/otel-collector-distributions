@@ -1,12 +1,12 @@
-FROM --platform=$BUILDPLATFORM golang:1.23 AS build
+ARG GO_VERSION=1.24
+FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS build
 ARG TARGETPLATFORM
-ARG OTEL_VERSION
 WORKDIR /app
+COPY --from=ocb ./go.* .
 COPY ./manifest.yaml .
-RUN go install go.opentelemetry.io/collector/cmd/builder@v${OTEL_VERSION}
-RUN CGO_ENABLED=0 builder --config=manifest.yaml
+RUN CGO_ENABLED=0 go tool go.opentelemetry.io/collector/cmd/builder --config=manifest.yaml
 
-FROM alpine:latest AS prep
+FROM alpine:3.20 AS prep
 RUN apk --update add ca-certificates
 
 FROM scratch
@@ -16,6 +16,6 @@ USER ${USER_UID}:${USER_GID}
 COPY --from=prep /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=build /app/dist/otelcol /
 COPY ./config.yaml /etc/otel/
-EXPOSE 4317 55680 55679
+EXPOSE 13133
 ENTRYPOINT ["/otelcol"]
 CMD ["--config", "/etc/otel/config.yaml"]

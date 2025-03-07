@@ -1,2 +1,23 @@
 {
+  extends: ["config:recommended", ":disableDependencyDashboard"],
+  ocb: {
+    fileMatch: ["manifest.ya?ml$"]
+  },
+  enabledManagers: ["github-actions", "dockerfile", "gomod", "ocb"],
+  packageRules: [
+    {
+      "matchPackageNames": ["go.opentelemetry.io/**", "github.com/open-telemetry/opentelemetry-collector-contrib/**"],
+      "groupName": "go.opentelemetry.io"
+    },
+    {
+      matchUpdateTypes: ["major", "minor"],
+      automerge: true,
+      extends: ["schedule:weekly", "schedule:automergeWeekly"]
+    },
+    {
+      matchUpdateTypes: ["patch"],
+      automerge: true,
+      extends: ["schedule:automergeDaily"]
+    }
+  ]
 }
