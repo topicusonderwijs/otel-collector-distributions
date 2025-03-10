@@ -10,7 +10,7 @@
       "extra-files": [
         {
           "type": "yaml",
-          "path": "distributions/**/manifest.yaml",
+          "path": "distributions/otelcol-cloudflare/manifest.yaml",
           "jsonpath": "$.dist.version"
         }
       ]
