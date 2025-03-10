@@ -7,13 +7,13 @@
     "distributions/otelcol-cloudflare": {
       "package-name": "otelcol-cloudflare",
       "component": "otelcol-cloudflare"
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "manifest.yaml",
+          "jsonpath": "$.dist.version"
+        }
+      ]
     }
-  },
-  "extra-files": [
-    {
-      "type": "yaml",
-      "path": "distributions/otelcol-cloudflare/manifest.yaml",
-      "jsonpath": "$.dist.version"
-    }
-  ]
+  }
 }
