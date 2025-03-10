@@ -27,5 +27,5 @@ service:
   pipelines:
     logs:
       receivers: [cloudflare]
-      processors: [batch]
+      processors: [memory_limiter, batch]
       exporters: [otlp]
