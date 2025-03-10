@@ -14,12 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v4
+        name: Release Please
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
+
       - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
+        name: Build
         if: ${{ steps.release.outputs.releases_created }}
         with:
           publish: 'true'
