@@ -19,5 +19,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
-      - uses: sboschman/build-action@main
+      - uses: sboschman/otel-collector-distributions/build-action@main
         if: ${{ steps.release.outputs.releases_created }}
