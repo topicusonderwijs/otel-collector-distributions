@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: sboschman/build-action@main
+      - uses: sboschman/otel-collector-distributions/build-action@main
         
       # - uses: actions/checkout@v4
 
