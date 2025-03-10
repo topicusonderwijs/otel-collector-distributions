@@ -12,6 +12,7 @@ receivers:
         ClientRequestURI: http_request.uri
 
 processors:
+  memory_limiter:
   batch:
 
 exporters:
