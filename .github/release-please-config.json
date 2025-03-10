@@ -15,5 +15,7 @@
         }
       ]
     }
-  }
+  },
+  "pull-request-header": "Automated Release PR",
+  "pull-request-title-pattern": "chore: release${component} ${version}"
 }
