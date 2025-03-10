@@ -27,6 +27,7 @@ runs:
         password: ${{ inputs.token }}
 
     - name: Get Go version
+      shell: bash
       run: echo "GO_VERSION=$(go mod edit -json | jq -r .Go)" >> $GITHUB_ENV
 
     - name: Build and push image
