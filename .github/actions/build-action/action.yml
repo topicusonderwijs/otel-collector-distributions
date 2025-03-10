@@ -1,0 +1,14 @@
+name: 'OpenTelemetry Collector Build Action'
+description: 'Build a custom OpenTelemetry Collector distribution'
+inputs:
+outputs:
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
