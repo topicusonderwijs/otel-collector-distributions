@@ -9,9 +9,8 @@
       "component": "otelcol-cloudflare",
       "extra-files": [
         {
-          "type": "yaml",
-          "path": "manifest.yaml",
-          "jsonpath": "$.dist.version"
+          "type": "generic",
+          "path": "manifest.yaml"
         }
       ]
     }
