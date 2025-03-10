@@ -1,6 +1,8 @@
 {
   "release-type": "simple",
   "packages": {
-    "distributions/otelcol-cloudflare": {}
+    "distributions/otelcol-cloudflare": {
+      "package-name": "otelcol-cloudflare"
+    }
   }
 }
