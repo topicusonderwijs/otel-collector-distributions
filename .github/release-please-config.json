@@ -6,7 +6,7 @@
   "packages": {
     "distributions/otelcol-cloudflare": {
       "package-name": "otelcol-cloudflare",
-      "component": "otelcol-cloudflare"
+      "component": "otelcol-cloudflare",
       "extra-files": [
         {
           "type": "yaml",
