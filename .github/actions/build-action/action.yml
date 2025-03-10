@@ -1,6 +1,9 @@
 name: 'OpenTelemetry Collector Build Action'
 description: 'Build a custom OpenTelemetry Collector distribution'
-# inputs:
+inputs:
+  publish:
+    required: true
+    default: false
 # outputs:
 runs:
   using: "composite"
