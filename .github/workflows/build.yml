@@ -20,6 +20,7 @@ jobs:
 
     steps:
       - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
+        name: Build
         
       # - uses: actions/checkout@v4
 
