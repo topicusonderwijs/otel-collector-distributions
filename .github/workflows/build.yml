@@ -3,11 +3,11 @@ name: Build
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'Dockerfile'
-      - 'go.mod'
-      - 'go.sum'
-      - 'distributions/**'
+    # paths:
+    #   - 'Dockerfile'
+    #   - 'go.mod'
+    #   - 'go.sum'
+    #   - 'distributions/**'
   pull_request:
     branches: [ "main" ]
 
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: sboschman/otel-collector-distributions/build-action@main
+      - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
         
       # - uses: actions/checkout@v4
 
