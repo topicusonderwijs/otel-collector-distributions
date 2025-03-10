@@ -1,5 +1,8 @@
 {
   "release-type": "simple",
+  "exclude-paths": [
+    ".github"
+  ],
   "packages": {
     "distributions/otelcol-cloudflare": {
       "package-name": "otelcol-cloudflare"
