@@ -5,7 +5,8 @@
   ],
   "packages": {
     "distributions/otelcol-cloudflare": {
-      "package-name": "otelcol-cloudflare"
+      "package-name": "otelcol-cloudflare",
+      "component": "otelcol-cloudflare"
     }
   }
 }
