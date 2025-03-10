@@ -4,8 +4,7 @@ inputs:
   token:
     required: false
   publish:
-    type: boolean
-    default: false
+    default: 'false'
 # outputs:
 runs:
   using: "composite"
@@ -21,7 +20,7 @@ runs:
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
-      if: inputs.publish
+      if: ${{ inputs.debug_mode == 'true' }}
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
