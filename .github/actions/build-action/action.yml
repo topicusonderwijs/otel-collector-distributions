@@ -1,6 +1,8 @@
 name: 'OpenTelemetry Collector Build Action'
 description: 'Build a custom OpenTelemetry Collector distribution'
 inputs:
+  token:
+    required: false
   publish:
     required: true
     default: false
@@ -23,4 +25,4 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.token }}
