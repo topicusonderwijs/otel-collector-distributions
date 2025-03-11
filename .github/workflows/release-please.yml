@@ -5,13 +5,16 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
-  release-please:
+  release_please:
+    name: Release Please
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      paths_released: ${{ steps.release.outputs.paths_released }}
     steps:
       - uses: googleapis/release-please-action@v4
         name: Release Please
@@ -20,3 +23,45 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
+      - name: Prepare for next release
+        if: needs.release_please.outputs.releases_created == 'true'
+        run: |-
+          yq -i '.dist.version = "0.0.0-dev"' distributions/**/manifest.yaml
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        if: needs.release_please.outputs.releases_created == 'true'
+        name: Commit
+        with:
+          commit_message: "fix: Prepare for next release"
+          file_pattern: "distributions/**/manifest.yaml"
+        
+
+  # publish:
+  #   name: Publish
+  #   runs-on: ubuntu-latest
+  #   if: needs.release_please.outputs.releases_created == 'true'
+  #   needs:
+  #     - release_please
+  #   permissions:
+  #     packages: write
+  #   strategy:
+  #     matrix:
+  #       path: ${{ fromJSON(needs.release_please.outputs.paths_released) }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: ${{ matrix.path }}
+
+      # paths_released -> iterate?
+
+      # <path>--tag_name
+
+      # checkout -> ref: '' (de tag)
+
+      # FIXME: checkout tag?
+      # - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
+      #   if: ${{ steps.release.outputs.releases_created == 'true' }}
+      #   name: Publish
+      #   with:
+      #     publish: 'true'
+      #     token: ${{ secrets.GITHUB_TOKEN }}
