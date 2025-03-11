@@ -5,7 +5,7 @@ receivers:
       #   key_file: some_key_file
       #   cert_file: some_cert_file
       endpoint: 0.0.0.0:12345
-      # secret: 1234567890abcdef1234567890abcdefg
+      # secret: 1234567890abcdef1234567890abcdef
       timestamp_field: EdgeStartTimestamp
       attributes:
         ClientIP: http_request.client_ip
