@@ -1,11 +1,10 @@
 # OpenTelemetry Collector distributions
 
-
 This repository assembles OpenTelemetry Collector distributions, such as the 'cloudflare logs' distribution.
 
 Each distribution contains:
 
-- Container images
+- Multi-arch container images
   
 More details about each individual distribution can be seen in its own readme files.
 

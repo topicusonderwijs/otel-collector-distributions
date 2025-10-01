@@ -21,7 +21,7 @@ jobs:
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
       - uses: actions/github-script@v8
-        if: steps.release-please.outputs.releases_created == 'false'
+        if: steps.release-please.outputs.releases_created == 'true'
         name: Create dispatch payload
         id: github-releases
         with:
@@ -43,7 +43,7 @@ jobs:
             return github_releases
       - run: echo ${{ steps.github-releases.outputs.github_releases }}
       - uses: peter-evans/repository-dispatch@v3
-        if: steps.release-please.outputs.releases_created == 'false'
+        if: steps.release-please.outputs.releases_created == 'true'
         name: Repository Dispatch
         with:
           event-type: publish-assets
