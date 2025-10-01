@@ -34,7 +34,7 @@ jobs:
         if: steps.release.outputs.releases_created == 'true'
         name: Commit
         with:
-          commit_message: "chore: Prepare for next release"
+          commit_message: "build: Prepare for next release"
           file_pattern: "distributions/**/manifest.yaml"
         
 
