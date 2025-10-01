@@ -5,7 +5,7 @@
   ],
   "changelog-sections": [
     { "type": "feat", "section": "Features" },
-    { "type": "fix", "scope": "deps", "section": "Bug Fixes" },
+    { "type": "fix", "section": "Bug Fixes" },
     { "type": "chore", "scope": "deps", "section": "Dependencies" },
     { "type": "chore", "section": "Miscellaneous" },
   ],
