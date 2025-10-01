@@ -1,3 +1,3 @@
 # OpenTelemetry Collector Cloudflare Logs Distro
 
-This distributions contains
+This distributions contains all the
