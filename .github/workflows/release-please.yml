@@ -47,7 +47,7 @@ jobs:
         name: Repository Dispatch
         with:
           event-type: publish-assets
-          client-payload: ${{ toJSON(steps.github-releases.outputs.result) }}
+          client-payload: ${{ steps.github-releases.outputs.result }}
       - uses: actions/checkout@v4
         if: steps.release-please.outputs.releases_created == 'true'
         name: Checkout
