@@ -41,13 +41,13 @@ jobs:
               )
             }
             return github_releases
-      - run: echo ${{ steps.github-releases.outputs.github_releases }}
+      - run: echo ${{ steps.github-releases.outputs.result }}
       - uses: peter-evans/repository-dispatch@v3
         if: steps.release-please.outputs.releases_created == 'true'
         name: Repository Dispatch
         with:
           event-type: publish-assets
-          client-payload: ${{ toJSON(steps.github-releases.outputs.github_releases) }}
+          client-payload: ${{ toJSON(steps.github-releases.outputs.result) }}
       - uses: actions/checkout@v4
         if: steps.release-please.outputs.releases_created == 'true'
         name: Checkout
