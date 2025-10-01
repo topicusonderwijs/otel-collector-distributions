@@ -1,8 +1,8 @@
-name: release
+name: Release
+
 on:
-  push:
-    tags:
-      - 'otelcol-*-v*'
+  repository_dispatch:
+    types: [publish-assets]
 
 permissions:
   packages: write
@@ -11,8 +11,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
-        name: Publish
-        with:
-          publish: 'true'
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo ${{ github.event.client_payload }}
+      # - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
+      #   name: Publish
+      #   with:
+      #     publish: 'true'
+      #     token: ${{ secrets.GITHUB_TOKEN }}

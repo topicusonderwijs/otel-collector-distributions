@@ -1,4 +1,4 @@
-name: release-please
+name: Release Please
 
 on:
   push:
@@ -12,59 +12,51 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    outputs:
-      releases_created: ${{ steps.release.outputs.releases_created }}
-      paths_released: ${{ steps.release.outputs.paths_released }}
     steps:
       - uses: googleapis/release-please-action@v4
         name: Release Please
-        id: release
+        id: release-please
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
+      - uses: actions/github-script@v8
+        if: steps.release-please.outputs.releases_created == 'false'
+        name: Create dispatch payload
+        id: github-releases
+        with:
+          script: |
+            const paths_released = JSON.parse(JSON.stringify(${{ steps.release-please.outputs.paths_released }}))
+            const releases_output = JSON.parse(JSON.stringify(${{ toJSON(steps.release-please.outputs) }}))
+            const github_releases = []
+            for(const path of paths_released){
+              github_releases.push(
+                {
+                  path: path,
+                  package: path.includes('helm/') ? path.replace(/^.+\//,''): '${{ github.repository }}'.replace(/^.+\//,''),
+                  version: releases_output[`${path}--version`] || releases_output['version'],
+                  package_type: path.replace(/^\.|\/.*/, '') || 'docker',
+                  tag_name: releases_output[`${path}--tag_name`] || releases_output['version']
+                }
+              )
+            }
+            return github_releases
+      - uses: peter-evans/repository-dispatch@v3
+        if: steps.release-please.outputs.releases_created == 'false'
+        name: Repository Dispatch
+        with:
+          event-type: publish-assets
+          client-payload: ${{ steps.github-releases.outputs.github_releases }}
       - uses: actions/checkout@v4
-        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release-please.outputs.releases_created == 'true'
         name: Checkout
       - name: Prepare for next release
-        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release-please.outputs.releases_created == 'true'
         run: |-
           yq -i '.dist.version = "0.0.0-dev"' distributions/**/manifest.yaml
       - uses: stefanzweifel/git-auto-commit-action@v5
-        if: steps.release.outputs.releases_created == 'true'
+        if: steps.release-please.outputs.releases_created == 'true'
         name: Commit
         with:
           commit_message: "build: Prepare for next release"
           file_pattern: "distributions/**/manifest.yaml"
-        
-
-  # publish:
-  #   name: Publish
-  #   runs-on: ubuntu-latest
-  #   if: needs.release_please.outputs.releases_created == 'true'
-  #   needs:
-  #     - release_please
-  #   permissions:
-  #     packages: write
-  #   strategy:
-  #     matrix:
-  #       path: ${{ fromJSON(needs.release_please.outputs.paths_released) }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         ref: ${{ matrix.path }}
-
-      # paths_released -> iterate?
-
-      # <path>--tag_name
-
-      # checkout -> ref: '' (de tag)
-
-      # FIXME: checkout tag?
-      # - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
-      #   if: ${{ steps.release.outputs.releases_created == 'true' }}
-      #   name: Publish
-      #   with:
-      #     publish: 'true'
-      #     token: ${{ secrets.GITHUB_TOKEN }}
