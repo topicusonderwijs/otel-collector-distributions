@@ -3,6 +3,12 @@
   "exclude-paths": [
     ".github"
   ],
+  "changelog-sections": [
+    { "type": "feat", "section": "Features" },
+    { "type": "fix", "scope": "deps", "section": "Bug Fixes" },
+    { "type": "chore", "scope": "deps", "section": "Dependencies" },
+    { "type": "chore", "section": "Miscellaneous" },
+  ],
   "packages": {
     "distributions/otelcol-cloudflare": {
       "package-name": "otelcol-cloudflare",
