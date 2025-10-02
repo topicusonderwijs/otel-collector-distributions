@@ -4,7 +4,7 @@ inputs:
   token:
     required: false
   publish:
-    default: 'false'
+    default: 'true'
 # outputs:
 runs:
   using: "composite"
