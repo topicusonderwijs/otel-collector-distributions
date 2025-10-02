@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: show payload
-        run: echo ${{ fromJson(github.event.client_payload.releases) }}
+        run: echo ${{ github.event.client_payload.releases }}
       # - uses: sboschman/otel-collector-distributions/.github/actions/build-action@main
       #   name: Publish
       #   with:
