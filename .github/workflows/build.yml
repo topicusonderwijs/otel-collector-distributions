@@ -60,7 +60,7 @@ jobs:
     strategy:
       matrix:
         distro: ${{ fromJson(needs.check-files.outputs.all_changed_distributions) }}
-    uses: sboschman/otel-collector-distributions/.github/workflows/build-push-template.yml@main
+    uses: topicusonderwijs/otel-collector-distributions/.github/workflows/build-push-template.yml@main
     with:
       path: ${{ matrix.distro }}
     secrets: inherit
