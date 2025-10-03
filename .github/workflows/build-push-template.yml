@@ -79,4 +79,4 @@ jobs:
             org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
           push: ${{ inputs.version && true || false }}
           outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
-          tags: ghcr.io/${{ github.actor }}/${{ env.OTEL_IMAGE_NAME }}:${{ inputs.version || 'latest' }}
+          tags: ghcr.io/topicusonderwijs/${{ env.OTEL_IMAGE_NAME }}:${{ inputs.version || 'latest' }}
