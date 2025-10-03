@@ -5,4 +5,3 @@ This distributions contains the components from both the [OpenTelemetry Collecto
 ## Components
 
 The full list of components is available in the [manifest](manifest.yaml)
-

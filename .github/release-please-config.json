@@ -12,15 +12,15 @@
   "packages": {
     "distributions/otelcol-cloudflare": {
       "package-name": "otelcol-cloudflare",
-      "component": "otelcol-cloudflare",
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "manifest.yaml"
-        }
-      ]
+      "component": "otelcol-cloudflare"
     }
   },
+  "extra-files": [
+    {
+      "type": "generic",
+      "path": "manifest.yaml"
+    }
+  ],
   "pull-request-header": ":robot: Automated Release PR",
   "separate-pull-requests": true,
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
