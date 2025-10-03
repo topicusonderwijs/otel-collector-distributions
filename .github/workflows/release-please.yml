@@ -5,13 +5,24 @@ on:
     branches:
       - main
 
+concurrency:
+  # Only cancel in-progress jobs or runs for the current workflow - matches against branch & tags
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
-  release_please:
+  release-please:
     name: Release Please
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+    outputs:
+      github_releases: ${{ steps.github-releases.outputs.result }}
     steps:
       - uses: googleapis/release-please-action@v4
         name: Release Please
@@ -20,6 +31,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
+
       - uses: actions/github-script@v8
         if: steps.release-please.outputs.releases_created == 'true'
         name: Create dispatch payload
@@ -41,23 +53,36 @@ jobs:
               )
             }
             return github_releases
-      - run: echo ${{ steps.github-releases.outputs.result }}
-      - uses: peter-evans/repository-dispatch@v3
-        if: steps.release-please.outputs.releases_created == 'true'
-        name: Repository Dispatch
-        with:
-          event-type: publish-assets
-          client-payload: '{"releases": ${{ steps.github-releases.outputs.result }}}'
+
+  prepare-next-release:
+    if: needs.release-please.outputs.github_releases != '[]'
+    needs: [release-please]
+    name: Prepare for next release
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v4
-        if: steps.release-please.outputs.releases_created == 'true'
         name: Checkout
       - name: Prepare for next release
-        if: steps.release-please.outputs.releases_created == 'true'
         run: |-
           yq -i '.dist.version = "0.0.0-dev"' distributions/**/manifest.yaml
       - uses: stefanzweifel/git-auto-commit-action@v5
-        if: steps.release-please.outputs.releases_created == 'true'
         name: Commit
         with:
           commit_message: "build: Prepare for next release"
           file_pattern: "distributions/**/manifest.yaml"
+
+  publish-assets:
+    if: needs.release-please.outputs.github_releases != '[]'
+    needs: [release-please]
+    permissions:
+      packages: write
+    strategy:
+      matrix: 
+        release: ${{ fromJson(needs.release-please.outputs.github_releases) }}
+      fail-fast: false
+    uses: sboschman/otel-collector-distributions/.github/workflows/build-push-template.yml@main
+    with:
+      path: ${{ matrix.release.path }}
+      git_tag_name: ${{ matrix.release.tag_name }}
+      version: ${{ matrix.release.version }}
+    secrets: inherit
