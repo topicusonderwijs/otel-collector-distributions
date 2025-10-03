@@ -13,6 +13,18 @@
       matchDepTypes: ["stage"],
       matchDepNames: ["ocb"],
       enabled: false
+    },
+    {
+      matchManagers: ["dockerfile", "gomod", "ocb"],
+      matchUpdateTypes: ["minor"],
+      automerge: true,
+      extends: ["schedule:automergeWeekly"]
+    },
+    {
+      matchManagers: ["dockerfile", "gomod", "ocb"],
+      matchUpdateTypes: ["patch"],
+      automerge: true,
+      extends: ["schedule:automergeDaily"]
     }
   ]
 }

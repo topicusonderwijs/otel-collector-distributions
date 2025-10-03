@@ -55,7 +55,7 @@ jobs:
           echo "all_changed=$filtered_array" >> "$GITHUB_OUTPUT"
   
   build:
-    if: needs.check-files.outputs.all_changed_distributions != '[]'
+    if: needs.check-files.outputs.all_changed_distributions && needs.check-files.outputs.all_changed_distributions != '[]'
     needs: check-files
     strategy:
       matrix:
