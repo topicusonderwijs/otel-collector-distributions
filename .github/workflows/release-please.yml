@@ -1,0 +1,89 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  # Only cancel in-progress jobs or runs for the current workflow - matches against branch & tags
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      github_releases: ${{ steps.github-releases.outputs.result }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        name: Release Please
+        id: release-please
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+
+      - uses: actions/github-script@v8
+        if: steps.release-please.outputs.releases_created == 'true'
+        name: Create releases
+        id: github-releases
+        with:
+          script: |
+            const paths_released = JSON.parse(JSON.stringify(${{ steps.release-please.outputs.paths_released }}))
+            const releases_output = JSON.parse(JSON.stringify(${{ toJSON(steps.release-please.outputs) }}))
+            const github_releases = []
+            for(const path of paths_released){
+              github_releases.push(
+                {
+                  path: path,
+                  package: path.includes('helm/') ? path.replace(/^.+\//,''): '${{ github.repository }}'.replace(/^.+\//,''),
+                  version: releases_output[`${path}--version`] || releases_output['version'],
+                  package_type: path.replace(/^\.|\/.*/, '') || 'docker',
+                  tag_name: releases_output[`${path}--tag_name`] || releases_output['version']
+                }
+              )
+            }
+            return github_releases
+
+  prepare-next-release:
+    if: needs.release-please.outputs.github_releases && needs.release-please.outputs.github_releases != '[]'
+    needs: [release-please]
+    name: Prepare for next release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout
+      - name: Prepare for next release
+        run: |-
+          yq -i '.dist.version = "0.0.0-dev"' distributions/**/manifest.yaml
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        name: Commit
+        with:
+          commit_message: "build: Prepare for next release"
+          file_pattern: "distributions/**/manifest.yaml"
+
+  publish-assets:
+    if: needs.release-please.outputs.github_releases && needs.release-please.outputs.github_releases != '[]'
+    needs: [release-please]
+    name: Publish container images
+    permissions:
+      packages: write
+    strategy:
+      matrix: 
+        release: ${{ fromJson(needs.release-please.outputs.github_releases) }}
+      fail-fast: false
+    uses: topicusonderwijs/otel-collector-distributions/.github/workflows/build-push-template.yml@main
+    with:
+      path: ${{ matrix.release.path }}
+      git_tag_name: ${{ matrix.release.tag_name }}
+      version: ${{ matrix.release.version }}
+    secrets: inherit

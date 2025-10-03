@@ -1,0 +1,66 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+      - 'go.mod'
+      - 'go.sum'
+      - 'distributions/**'
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  check-files:
+    runs-on: ubuntu-latest
+    outputs:
+      all_changed_distributions: ${{ steps.changed-distros.outputs.all_changed }}
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: ${{ github.event_name == 'pull_request' && 1 || 2 }}
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            Dockerfile
+            go.mod
+            go.sum
+            distributions/**
+          files_ignore: |
+            distributions/**/CHANGELOG.md
+          dir_names: "true"
+          matrix: "true"
+
+      - name: Get changed distributions
+        id: changed-distros
+        if: steps.changed-files.outputs.any_changed == 'true'
+        shell: bash
+        run: |
+          contains_dot=$(echo '${{ steps.changed-files.outputs.all_changed_files }}' | jq 'map(select(. == ".")) | length')
+
+          if [[ $contains_dot -gt 0 ]]; then
+            filtered_array=$(ls -d ./distributions/* | jq -R -s -c 'split("\n")[:-1]')
+          else
+            filtered_array='${{ steps.changed-files.outputs.all_changed_files }}'
+          fi
+
+          echo "$filtered_array"
+          echo "all_changed=$filtered_array" >> "$GITHUB_OUTPUT"
+  
+  build:
+    if: needs.check-files.outputs.all_changed_distributions != '[]'
+    needs: check-files
+    strategy:
+      matrix:
+        distro: ${{ fromJson(needs.check-files.outputs.all_changed_distributions) }}
+    uses: topicusonderwijs/otel-collector-distributions/.github/workflows/build-push-template.yml@main
+    with:
+      path: ${{ matrix.distro }}
+    secrets: inherit
