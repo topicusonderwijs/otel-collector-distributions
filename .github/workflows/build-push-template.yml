@@ -41,14 +41,21 @@ jobs:
     #         password: ${{ inputs.token }}
 
       - name: Get Go version
-        shell: bash
-        run: echo "GO_VERSION=$(go mod edit -json | jq -r .Go)" >> $GITHUB_ENV
+        run: |
+          echo "GO_VERSION=$(go mod edit -json | jq -r .Go)" >> $GITHUB_ENV
+          echo "Detected: $GO_VERSION"
 
-    #   - name: Build and push image
+      - name:
+        run: |
+          echo "OTEL_NAME=$(yq '.dist.name'${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
+          echo "OTEL_DESCRIPTION=$(yq '.dist.description' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
+          echo "$OTEL_NAME"
+          echo "$OTEL_DESCRIPTION"
+
+    #   - name: Build
     #     uses: docker/build-push-action@v6
     #     with:
-    #       # context -> repo path
-    #       context: ./distributions/otelcol-cloudflare
+    #       context: ${{ inputs.path }}
     #       build-contexts: |
     #         ocb=.
     #         file: ./Dockerfile
