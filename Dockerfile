@@ -1,4 +1,4 @@
-ARG GO_VERSION=1.23
+ARG GO_VERSION=1.24
 FROM --platform=$BUILDPLATFORM golang:${GO_VERSION} AS build
 ARG TARGETPLATFORM
 WORKDIR /app
@@ -10,11 +10,12 @@ FROM alpine:3.20 AS prep
 RUN apk --update add ca-certificates
 
 FROM scratch
+ARG OTEL_EXECUTABLE
 ARG USER_UID=10001
 ARG USER_GID=10001
 USER ${USER_UID}:${USER_GID}
 COPY --from=prep /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=build /app/dist/otelcol /
+COPY --from=build /app/dist/${OTEL_EXECUTABLE} /otelcol
 COPY ./config.yaml /etc/otel/
 EXPOSE 13133
 ENTRYPOINT ["/otelcol"]
