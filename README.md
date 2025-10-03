@@ -12,6 +12,10 @@ Current list of distributions:
 
 - [OpenTelemetry Collector Cloudflare Logs (also known as "otelcol-cloudflare")](./distributions/otelcol-cloudflare)
 
+## Examples
+
+Example manifests for upstream distributions can be found at: https://github.com/open-telemetry/opentelemetry-collector-releases/tree/main/distributions
+
 ## Releases
 
 Conventional commits to `distributions/**` trigger the creation of a 'release PR' together with a changelog.
@@ -19,11 +23,3 @@ Conventional commits to `distributions/**` trigger the creation of a 'release PR
 Caveat: changes to `Dockerfile` and `go.*` are not triggering a release PR or included in the changelog for a OTel distribution (see this [question](https://stackoverflow.com/questions/79484918/release-please-github-action-manifest-releaser-to-force-bump-all-packages), or this [issue](https://github.com/googleapis/release-please/pull/2534))
 
 To create the release, including building and publishing of the images, just merge the release PR.
-
-## TODO
-
-Update ocb providers with renovate:
-https://github.com/renovatebot/renovate/issues/31747
-
-Example manifests:
-https://github.com/open-telemetry/opentelemetry-collector-releases/tree/main/distributions
