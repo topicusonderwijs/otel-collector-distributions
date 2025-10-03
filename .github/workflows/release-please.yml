@@ -81,7 +81,7 @@ jobs:
       matrix: 
         release: ${{ fromJson(needs.release-please.outputs.github_releases) }}
       fail-fast: false
-    uses: sboschman/otel-collector-distributions/.github/workflows/build-push-template.yml@main
+    uses: topicusonderwijs/otel-collector-distributions/.github/workflows/build-push-template.yml@main
     with:
       path: ${{ matrix.release.path }}
       git_tag_name: ${{ matrix.release.tag_name }}
