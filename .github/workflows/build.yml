@@ -59,7 +59,7 @@ jobs:
         run: echo '${{ steps.changed-files.outputs.all_changed_files }}'
 
       - name: List all changed distributions
-        run: echo '${{ steps.changed-distros.outputs.all_changed_distributions }}'
+        run: echo '${{ steps.changed-distros.outputs.all_changed }}'
   
   # build:
   #   needs: check-files
