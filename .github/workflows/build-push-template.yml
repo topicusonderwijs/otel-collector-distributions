@@ -40,13 +40,13 @@ jobs:
 
       - name: Get Go version
         run: |
-          echo "GO_VERSION=$(go mod edit -json | jq -r .Go)"
+          GO_VERSION=$(go mod edit -json | jq -r .Go)
           echo "Detected: $GO_VERSION"
           echo "$GO_VERSION" >> $GITHUB_ENV
 
       - name: Get metadata from manifest
         run: |
-          echo "OTEL_NAME=$(yq '.dist.name'${{ inputs.path }}/manifest.yaml)"
+          OTEL_NAME=$(yq '.dist.name'${{ inputs.path }}/manifest.yaml)
           echo "OTEL_IMAGE_NAME=${OTEL_NAME/otelcol/opentelemetry-collector}" >> $GITHUB_ENV
           echo "OTEL_DESCRIPTION=$(yq '.dist.description' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
 
