@@ -74,6 +74,7 @@ jobs:
   publish-assets:
     if: needs.release-please.outputs.github_releases && needs.release-please.outputs.github_releases != '[]'
     needs: [release-please]
+    name: Publish container images
     permissions:
       packages: write
     strategy:
