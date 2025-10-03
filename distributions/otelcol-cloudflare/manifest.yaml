@@ -1,5 +1,5 @@
 dist:
-  name: otelcol
+  name: otelcol-cloudflare
   description: OTel Collector Cloudflare Logs
   output_path: ./dist
   version: 0.0.0-dev # x-release-please-version
