@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.1.0...otelcol-cloudflare-v0.2.0) (2025-10-03)
+
+
+### Features
+
+* add otelcol-cloudflare ([#1](https://github.com/topicusonderwijs/otel-collector-distributions/issues/1)) ([cc98c23](https://github.com/topicusonderwijs/otel-collector-distributions/commit/cc98c23d77e785e9ee39893c68c41b7642b8091b))
+
 ## [0.2.12](https://github.com/sboschman/otel-collector-distributions/compare/otelcol-cloudflare-v0.2.11...otelcol-cloudflare-v0.2.12) (2025-10-03)
 
 
