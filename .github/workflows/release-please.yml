@@ -34,7 +34,7 @@ jobs:
 
       - uses: actions/github-script@v8
         if: steps.release-please.outputs.releases_created == 'true'
-        name: Create dispatch payload
+        name: Create releases
         id: github-releases
         with:
           script: |
@@ -55,7 +55,7 @@ jobs:
             return github_releases
 
   prepare-next-release:
-    if: needs.release-please.outputs.github_releases != '[]'
+    if: needs.release-please.outputs.github_releases && needs.release-please.outputs.github_releases != '[]'
     needs: [release-please]
     name: Prepare for next release
     runs-on: ubuntu-latest
@@ -72,7 +72,7 @@ jobs:
           file_pattern: "distributions/**/manifest.yaml"
 
   publish-assets:
-    if: needs.release-please.outputs.github_releases != '[]'
+    if: needs.release-please.outputs.github_releases && needs.release-please.outputs.github_releases != '[]'
     needs: [release-please]
     permissions:
       packages: write
