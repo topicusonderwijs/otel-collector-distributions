@@ -1,4 +1,4 @@
-name: build and optionally publish to ci registry
+name: "template: Build and Push"
 
 on:
   workflow_call:
@@ -77,6 +77,6 @@ jobs:
             org.opencontainers.image.revision={{.FullCommit}}
             org.opencontainers.image.version={{.Version}}
             org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
-          push: ${{ inputs.publish == 'true' }}
+          push: ${{ inputs.version && true || false }}
           outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
           tags: ghcr.io/${{ github.actor }}/${{ env.OTEL_IMAGE_NAME }}:${{ inputs.version || 'latest' }}
