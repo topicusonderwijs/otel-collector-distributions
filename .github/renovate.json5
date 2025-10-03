@@ -1,10 +1,18 @@
 {
   extends: [
-    'local>topicusonderwijs/renovate-config:default.json5',
+   'local>topicusonderwijs/renovate-config:default.json5',
   ],
   semanticCommits: "enabled",
   ocb: {
-    fileMatch: ["manifest.ya?ml$"]
+    managerFilePatterns: ["distributions/**/manifest.yaml"]
   },
-  enabledManagers: ["github-actions", "dockerfile", "gomod", "ocb"]
+  enabledManagers: ["github-actions", "dockerfile", "gomod", "ocb"],
+  packageRules: [
+    {
+      matchManagers: ["dockerfile"],
+      matchDepTypes: ["stage"],
+      matchDepNames: ["ocb"],
+      enabled: false
+    }
+  ]
 }
