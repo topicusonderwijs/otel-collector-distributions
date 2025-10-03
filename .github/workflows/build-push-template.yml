@@ -47,6 +47,7 @@ jobs:
       - name: Get metadata from manifest
         run: |
           OTEL_NAME=$(yq '.dist.name' ${{ inputs.path }}/manifest.yaml)
+          echo "OTEL_NAME=$OTEL_NAME" >> $GITHUB_ENV
           echo "OTEL_IMAGE_NAME=${OTEL_NAME/otelcol/opentelemetry-collector}" >> $GITHUB_ENV
           echo "OTEL_DESCRIPTION=$(yq '.dist.description' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
 
@@ -59,6 +60,7 @@ jobs:
           file: ./Dockerfile
           build-args: |
             GO_VERSION=${{ env.GO_VERSION }}
+            OTEL_EXECUTABLE=${{ env.OTEL_NAME }}
           platforms: "linux/arm64,linux/amd64"
           labels: |
             org.opencontainers.image.source=https://github.com/{{ github.repository }}
