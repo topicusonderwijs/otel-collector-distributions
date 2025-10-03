@@ -42,7 +42,7 @@ jobs:
         run: |
           GO_VERSION=$(go mod edit -json | jq -r .Go)
           echo "Detected: $GO_VERSION"
-          echo "$GO_VERSION" >> $GITHUB_ENV
+          echo "GO_VERSION=$GO_VERSION" >> $GITHUB_ENV
 
       - name: Get metadata from manifest
         run: |
