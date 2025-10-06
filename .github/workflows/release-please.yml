@@ -65,7 +65,7 @@ jobs:
       - name: Prepare for next release
         run: |-
           yq -i '.dist.version = "0.0.0-dev"' distributions/**/manifest.yaml
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v6
         name: Commit
         with:
           commit_message: "build: Prepare for next release"
