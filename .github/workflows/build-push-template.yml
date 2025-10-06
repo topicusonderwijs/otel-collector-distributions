@@ -59,6 +59,12 @@ jobs:
           echo "OTEL_IMAGE_NAME=${OTEL_NAME/otelcol/opentelemetry-collector}" >> $GITHUB_ENV
           echo "OTEL_DESCRIPTION=$(yq '.dist.description' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
 
+      - name: Get Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: topicusonderwijs/${{ env.OTEL_IMAGE_NAME }}
+
       - name: Build
         uses: docker/build-push-action@v6
         with:
