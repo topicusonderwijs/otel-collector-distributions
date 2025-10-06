@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.2.2...otelcol-cloudflare-v0.2.3) (2025-10-06)
+
+
+### Bug Fixes
+
+* use just the version as image tag ([4d6d071](https://github.com/topicusonderwijs/otel-collector-distributions/commit/4d6d071ff3de9f2cbc88d7b5a0a8a1b4aac11e3d))
+
 ## [0.2.2](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.2.1...otelcol-cloudflare-v0.2.2) (2025-10-06)
 
 
