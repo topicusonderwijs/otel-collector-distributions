@@ -57,6 +57,7 @@ jobs:
           OTEL_NAME=$(yq '.dist.name' ${{ inputs.path }}/manifest.yaml)
           echo "OTEL_NAME=$OTEL_NAME" >> $GITHUB_ENV
           echo "OTEL_IMAGE_NAME=${OTEL_NAME/otelcol/opentelemetry-collector}" >> $GITHUB_ENV
+          echo "OTEL_IMAGE_VERSION=$(yq '.dist.version' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
           echo "OTEL_DESCRIPTION=$(yq '.dist.description' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
 
       - name: Get Docker metadata
@@ -65,6 +66,10 @@ jobs:
         with:
           context: git
           images: ghcr.io/topicusonderwijs/${{ env.OTEL_IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=raw,value=${{ env.OTEL_IMAGE_VERSION }}
           labels: |
             org.opencontainers.image.title=${{ env.OTEL_NAME }}
             org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
