@@ -63,6 +63,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
+          context: git
           images: ghcr.io/topicusonderwijs/${{ env.OTEL_IMAGE_NAME }}
           labels: |
             org.opencontainers.image.title=${{ env.OTEL_NAME }}
