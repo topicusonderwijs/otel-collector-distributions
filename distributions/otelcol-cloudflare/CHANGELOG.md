@@ -6,22 +6,11 @@
 ### Features
 
 * add otelcol-cloudflare ([#1](https://github.com/topicusonderwijs/otel-collector-distributions/issues/1)) ([cc98c23](https://github.com/topicusonderwijs/otel-collector-distributions/commit/cc98c23d77e785e9ee39893c68c41b7642b8091b))
-* release otelcol-cloudflare ([95d89f0](https://github.com/topicusonderwijs/otel-collector-distributions/commit/95d89f04496fce45a086c55a626bb402a1f898a8))
 
 
 ### Bug Fixes
 
 * include image labels ([572fbf2](https://github.com/topicusonderwijs/otel-collector-distributions/commit/572fbf2e75099931b78dca699f818da2fcace51b))
-* trigger release-please ([afc3943](https://github.com/topicusonderwijs/otel-collector-distributions/commit/afc3943bc9d538b5a77af18b4ef1160596b7846f))
-* use just the version as image tag ([4d6d071](https://github.com/topicusonderwijs/otel-collector-distributions/commit/4d6d071ff3de9f2cbc88d7b5a0a8a1b4aac11e3d))
-
-
-### Miscellaneous
-
-* **main:** release otelcol-cloudflare 0.2.0 ([#2](https://github.com/topicusonderwijs/otel-collector-distributions/issues/2)) ([58fda12](https://github.com/topicusonderwijs/otel-collector-distributions/commit/58fda12d4477eca64383cb65b51ea8411d5f94eb))
-* **main:** release otelcol-cloudflare 0.2.1 ([#10](https://github.com/topicusonderwijs/otel-collector-distributions/issues/10)) ([1d02c74](https://github.com/topicusonderwijs/otel-collector-distributions/commit/1d02c74c0ead2f336e9727ca739815e29d969011))
-* **main:** release otelcol-cloudflare 0.2.2 ([#11](https://github.com/topicusonderwijs/otel-collector-distributions/issues/11)) ([f5fe1ee](https://github.com/topicusonderwijs/otel-collector-distributions/commit/f5fe1ee2a72160b118c6130a79587790a8cc57bf))
-* **main:** release otelcol-cloudflare 0.2.3 ([#13](https://github.com/topicusonderwijs/otel-collector-distributions/issues/13)) ([f36d9dc](https://github.com/topicusonderwijs/otel-collector-distributions/commit/f36d9dcdc12d846234610d8a2123c86cf3f1ae79))
 
 ## [0.2.3](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.2.2...otelcol-cloudflare-v0.2.3) (2025-10-06)
 
