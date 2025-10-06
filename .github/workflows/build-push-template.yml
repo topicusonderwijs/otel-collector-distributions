@@ -59,6 +59,15 @@ jobs:
           echo "OTEL_IMAGE_NAME=${OTEL_NAME/otelcol/opentelemetry-collector}" >> $GITHUB_ENV
           echo "OTEL_DESCRIPTION=$(yq '.dist.description' ${{ inputs.path }}/manifest.yaml)" >> $GITHUB_ENV
 
+      - name: Get Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: topicusonderwijs/${{ env.OTEL_IMAGE_NAME }}
+          labels: |
+            org.opencontainers.image.title=${{ env.OTEL_NAME }}
+            org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
+
       - name: Build
         uses: docker/build-push-action@v6
         with:
@@ -70,13 +79,7 @@ jobs:
             GO_VERSION=${{ env.GO_VERSION }}
             OTEL_EXECUTABLE=${{ env.OTEL_NAME }}
           platforms: "linux/arm64,linux/amd64"
-          labels: |
-            org.opencontainers.image.source=https://github.com/{{ github.repository }}
-            org.opencontainers.image.created={{.Date}}
-            org.opencontainers.image.title={{.ProjectName}}
-            org.opencontainers.image.revision={{.FullCommit}}
-            org.opencontainers.image.version={{.Version}}
-            org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           push: ${{ inputs.version && true || false }}
           outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
-          tags: ghcr.io/topicusonderwijs/${{ env.OTEL_IMAGE_NAME }}:${{ inputs.version || 'latest' }}
