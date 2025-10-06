@@ -69,7 +69,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=raw,value=${{ env.OTEL_IMAGE_VERSION }}
+            type=match,pattern=${{ env.OTEL_NAME }}-v(.*),group=1
           labels: |
             org.opencontainers.image.title=${{ env.OTEL_NAME }}
             org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
