@@ -4,7 +4,7 @@ dist:
   output_path: ./dist
   version: 0.0.0-dev # x-release-please-version
 extensions:
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.137.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.138.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/pprofextension v0.137.0
 exporters:
   - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.137.0
