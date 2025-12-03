@@ -6,7 +6,7 @@ COPY --from=ocb ./go.* .
 COPY ./manifest.yaml .
 RUN CGO_ENABLED=0 go tool go.opentelemetry.io/collector/cmd/builder --config=manifest.yaml
 
-FROM alpine:3.22 AS prep
+FROM alpine:3.23 AS prep
 RUN apk --update add ca-certificates
 
 FROM scratch
