@@ -9,6 +9,12 @@
   enabledManagers: ["github-actions", "dockerfile", "gomod", "ocb"],
   packageRules: [
     {
+      "matchManagers": ["gomod"],
+      "matchDepNames": ["go"],
+      "matchDepTypes": ["golang"],
+      "rangeStrategy": "bump"
+    },
+    {
       matchManagers: ["dockerfile"],
       matchDepTypes: ["stage"],
       matchDepNames: ["ocb"],
