@@ -16,6 +16,12 @@ Current list of distributions:
 
 Example manifests for upstream distributions can be found at: https://github.com/open-telemetry/opentelemetry-collector-releases/tree/main/distributions
 
+## Development
+
+```
+docker build --build-context ocb=. -f ./Dockerfile distributions/otelcol-cloudflare
+```
+
 ## Releases
 
 Conventional commits to `distributions/**` trigger the creation of a 'release PR' together with a changelog.
