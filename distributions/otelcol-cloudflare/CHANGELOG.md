@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.2](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.1.1...otelcol-cloudflare-v0.1.2) (2026-03-09)
+
+
+### Dependencies
+
+* **deps:** update module github.com/open-telemetry/opentelemetry-collector-contrib/connector/countconnector to v0.147.0 ([#53](https://github.com/topicusonderwijs/otel-collector-distributions/issues/53)) ([f0654cb](https://github.com/topicusonderwijs/otel-collector-distributions/commit/f0654cb4afaae466c45147e62ec4b53bc082f17d))
+* **deps:** update module github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension to v0.147.0 ([#54](https://github.com/topicusonderwijs/otel-collector-distributions/issues/54)) ([06ff501](https://github.com/topicusonderwijs/otel-collector-distributions/commit/06ff5018ae65a4270bf6e619d8992530c0725e60))
+* **deps:** update module github.com/open-telemetry/opentelemetry-collector-contrib/extension/pprofextension to v0.147.0 ([#55](https://github.com/topicusonderwijs/otel-collector-distributions/issues/55)) ([22924a5](https://github.com/topicusonderwijs/otel-collector-distributions/commit/22924a5b3fc2eba6f616f92ffbc5ad0abaa0820b))
+* **deps:** update module github.com/open-telemetry/opentelemetry-collector-contrib/receiver/cloudflarereceiver to v0.147.0 ([#56](https://github.com/topicusonderwijs/otel-collector-distributions/issues/56)) ([0904051](https://github.com/topicusonderwijs/otel-collector-distributions/commit/0904051371e41ce67c8bc2d2e37f4a3f3fc57b34))
+* **deps:** update module go.opentelemetry.io/collector/confmap/provider/envprovider to v1.53.0 ([#101](https://github.com/topicusonderwijs/otel-collector-distributions/issues/101)) ([6f89528](https://github.com/topicusonderwijs/otel-collector-distributions/commit/6f89528a0be3382f5d128a2d991abe11a96e3a75))
+* **deps:** update module go.opentelemetry.io/collector/confmap/provider/fileprovider to v1.53.0 ([#105](https://github.com/topicusonderwijs/otel-collector-distributions/issues/105)) ([139fd1d](https://github.com/topicusonderwijs/otel-collector-distributions/commit/139fd1d9519a6fe6db310faad97e5169e034b46d))
+* **deps:** update module go.opentelemetry.io/collector/confmap/provider/httpprovider to v1.53.0 ([#102](https://github.com/topicusonderwijs/otel-collector-distributions/issues/102)) ([2e055f2](https://github.com/topicusonderwijs/otel-collector-distributions/commit/2e055f2e561e72bbaedb7fd0a70b01ef22d7a2f7))
+* **deps:** update module go.opentelemetry.io/collector/confmap/provider/httpsprovider to v1.53.0 ([#103](https://github.com/topicusonderwijs/otel-collector-distributions/issues/103)) ([6bfabe5](https://github.com/topicusonderwijs/otel-collector-distributions/commit/6bfabe5e4486f86bd541ffd7ef704490f2940f18))
+* **deps:** update module go.opentelemetry.io/collector/confmap/provider/yamlprovider to v1.53.0 ([#104](https://github.com/topicusonderwijs/otel-collector-distributions/issues/104)) ([053985b](https://github.com/topicusonderwijs/otel-collector-distributions/commit/053985b44de39ed03d7763457c208f37ca886a5d))
+* **deps:** update module go.opentelemetry.io/collector/exporter/debugexporter to v0.147.0 ([#46](https://github.com/topicusonderwijs/otel-collector-distributions/issues/46)) ([2ab956c](https://github.com/topicusonderwijs/otel-collector-distributions/commit/2ab956cfc033049accdc81d4bbda859f2b84e2bf))
+
 ## [0.1.1](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.1.0...otelcol-cloudflare-v0.1.1) (2026-02-25)
 
 
