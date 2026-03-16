@@ -75,7 +75,7 @@ jobs:
             org.opencontainers.image.description=${{ env.OTEL_DESCRIPTION }}
 
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ${{ inputs.path }}
           build-contexts: |
