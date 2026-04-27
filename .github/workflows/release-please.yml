@@ -24,7 +24,7 @@ jobs:
     outputs:
       github_releases: ${{ steps.github-releases.outputs.result }}
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         name: Release Please
         id: release-please
         with:
