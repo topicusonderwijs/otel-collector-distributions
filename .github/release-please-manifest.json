@@ -1,4 +1,4 @@
 {
   "distributions/otelcol-cloudflare": "0.1.2",
-  "distributions/otelcol-splunk": "0.1.0"
+  "distributions/otelcol-splunk": "0.2.0"
 }
