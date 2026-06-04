@@ -11,6 +11,7 @@ More details about each individual distribution can be seen in its own readme fi
 Current list of distributions:
 
 - [OpenTelemetry Collector Cloudflare Logs (also known as "otelcol-cloudflare")](./distributions/otelcol-cloudflare)
+- [OpenTelemetry Collector Splunk HEC (also known as "otelcol-splunk")](./distributions/otelcol-splunk)
 
 ## Examples
 

@@ -1,0 +1,35 @@
+receivers:
+  filelog:
+    include:
+      - /var/log/**/*.log
+    start_at: end
+    # include_file_path: true
+    # include_file_name: true
+
+processors:
+  memory_limiter:
+  batch:
+
+exporters:
+  # Output to stdout for debugging/visibility
+  debug:
+    verbosity: detailed
+  splunk_hec:
+    token: ${env:SPLUNK_HEC_TOKEN}
+    endpoint: https://splunk:8088/services/collector
+    source: otelcol
+    sourcetype: otelcol
+    index: main
+    # tls:
+    #   insecure_skip_verify: true
+
+extensions:
+  health_check:
+
+service:
+  extensions: [health_check]
+  pipelines:
+    logs:
+      receivers: [filelog]
+      processors: [memory_limiter, batch]
+      exporters: [splunk_hec, debug]

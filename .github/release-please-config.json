@@ -13,6 +13,10 @@
     "distributions/otelcol-cloudflare": {
       "package-name": "otelcol-cloudflare",
       "component": "otelcol-cloudflare"
+    },
+    "distributions/otelcol-splunk": {
+      "package-name": "otelcol-splunk",
+      "component": "otelcol-splunk"
     }
   },
   "extra-files": [
