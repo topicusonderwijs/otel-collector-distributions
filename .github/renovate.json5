@@ -7,6 +7,8 @@
     managerFilePatterns: ["distributions/**/manifest.yaml"]
   },
   enabledManagers: ["github-actions", "dockerfile", "gomod", "ocb"],
+  // the builder is only a tool dependency, without tidy go.sum misses its module hashes
+  postUpdateOptions: ["gomodTidy"],
   packageRules: [
     {
       "matchManagers": ["gomod"],
