@@ -21,6 +21,18 @@
       enabled: false
     },
     {
+      // OTel components must be on the same release to compile, so bump them together,
+      // with one PR per distribution (branch name gets the distribution directory)
+      matchManagers: ["ocb"],
+      matchPackageNames: [
+        "go.opentelemetry.io/collector/**",
+        "github.com/open-telemetry/opentelemetry-collector-contrib/**"
+      ],
+      groupName: "opentelemetry-collector",
+      additionalBranchPrefix: "{{parentDir}}-",
+      commitMessageSuffix: "({{parentDir}})"
+    },
+    {
       matchManagers: ["dockerfile", "gomod", "ocb"],
       matchUpdateTypes: ["minor"],
       automerge: true,

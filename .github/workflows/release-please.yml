@@ -64,7 +64,10 @@ jobs:
         name: Checkout
       - name: Prepare for next release
         run: |-
-          yq -i '.dist.version = "0.0.0-dev"' distributions/**/manifest.yaml
+          # yq -i with multiple files writes all documents into the first file, so edit one file at a time
+          for manifest in distributions/*/manifest.yaml; do
+            yq -i '.dist.version = "0.0.0-dev"' "$manifest"
+          done
       - uses: stefanzweifel/git-auto-commit-action@v7
         name: Commit
         with:
