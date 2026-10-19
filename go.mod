@@ -1,6 +1,6 @@
 module github.com/topicusonderwijs/otel-collector-distributions
 
-go 1.26.9
+go 1.27.2
 
 tool go.opentelemetry.io/collector/cmd/builder
 
