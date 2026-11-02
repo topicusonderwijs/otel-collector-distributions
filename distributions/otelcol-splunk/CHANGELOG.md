@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-splunk-v0.2.1...otelcol-splunk-v0.2.2) (2026-11-02)
+
+
+### Dependencies
+
+* **deps:** update opentelemetry-collector (otelcol-splunk) ([#249](https://github.com/topicusonderwijs/otel-collector-distributions/issues/249)) ([d927c53](https://github.com/topicusonderwijs/otel-collector-distributions/commit/d927c536f8f7b0e269e82e5b19437fed284141c2))
+
 ## [0.2.1](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-splunk-v0.2.0...otelcol-splunk-v0.2.1) (2026-10-19)
 
 
