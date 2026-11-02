@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.1.3...otelcol-cloudflare-v0.1.4) (2026-11-02)
+
+
+### Dependencies
+
+* **deps:** update opentelemetry-collector (otelcol-cloudflare) ([#248](https://github.com/topicusonderwijs/otel-collector-distributions/issues/248)) ([fbbea3d](https://github.com/topicusonderwijs/otel-collector-distributions/commit/fbbea3d242de19e605c1cd54b14261ca37775bd1))
+
 ## [0.1.3](https://github.com/topicusonderwijs/otel-collector-distributions/compare/otelcol-cloudflare-v0.1.2...otelcol-cloudflare-v0.1.3) (2026-10-19)
 
 
